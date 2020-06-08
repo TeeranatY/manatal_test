@@ -1,11 +1,12 @@
 from bs4 import BeautifulSoup
-import requests
 from selenium import webdriver
 import time
 def get_follower(url="https://twitter.com/KMbappe") :
     # try:
     #init webdriver
-    driver = webdriver.Chrome()
+    options = webdriver.ChromeOptions()
+    options.add_argument("headless")
+    driver = webdriver.Chrome(options=options)
     time.sleep(1)
     driver.get(url)
     time.sleep(1)
@@ -32,3 +33,4 @@ if __name__ == "__main__":
         get_follower()
     else :
         get_follower(inp)
+    
