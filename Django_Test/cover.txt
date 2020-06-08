@@ -1,0 +1,75 @@
+Student(student_ID="1237",firstName="F4",lastName="L4").save()
+
+
+School(name="S1",max_student_number=5,student="1234").save()
+
+School.objects.raw("INSERT INTO School VALUES (name="S1",max_student_number=5,student=);")
+
+from school_manager.models import Student, School , Student_School 
+
+School.objects.all().delete()
+Student.objects.all().delete()
+Student_School.objects.all().delete()
+
+python manage.py shell
+
+python manage.py runserver
+
+python manage.py migrate
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+student
+post : student
+{"firstname":"F4","lastname":"L6","school_name":"S1"}
+
+school
+post :school 
+{"school_name" : "S1" , "max_student_number": 3}
+put :school  with ID
+{"max_student_number": 3}
+
+student with ID
+put : student
+{"firstname":"F6","lastname":"L2"}
+
+delete : student
+
+school with ID
+put :school 
+{"max_student_number": 3}
+
+delete : school -> student
+
+
+nested school  with schoolID
+post :student creation with existed school
+{"firstname":"F6","lastname":"L2"}
+
+nested school student with both ID
+put :
+{"firstname":"F2","lastname":"L4","max_student_number": 4}
+
+{"firstname":"F2","lastname":"L4"}
+{"school_name" : "S1" , "max_student_number": 3}
+
+http://127.0.0.1:8000/students/ltYzyt
+http://127.0.0.1:8000/schools/S1/students/qooodJ
+// database query
+CREATE TABLE Student(
+	student_ID VARCHAR(20) PRIMARY KEY ,
+	firstname VARCHAR(20) NOT NULL,
+	lastname VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE School(
+	school_name VARCHAR(20) PRIMARY KEY,
+	max_student_number INT NOT NULL
+);
+
+CREATE TABLE Student_School(
+	student_ID VARCHAR(20) REFERENCES Student(student_ID), 
+	school_ID VARCHAR(20) REFERENCES School(school_ID)
+);

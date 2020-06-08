@@ -1,0 +1,4 @@
+# python test virtual environment
+Python_Test/env/*
+#database config in django
+Django_Test/myproject/myproject/config.py
