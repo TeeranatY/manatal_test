@@ -20,12 +20,12 @@ class manage_student_withID(APIView) :
             serializer = student_serializer(obj)
             return Response(data=serializer.data,status=status.HTTP_200_OK)
         except :
-            return Response(data="Something wrong",status=status.HTTP_400_BAD_REQUEST)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
     def put(self,request,id=None) :
         try :
             instance = Student.objects.get(student_ID=id)
         except :
-            return Response("ID is not valid",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response("ID is not exist",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         request.data["student_ID"] = id
         print(instance)
         serializer = student_serializer(instance,data=request.data)
@@ -243,7 +243,6 @@ class nested_manange_withID(APIView) :
             
         except :#school not exist
             return False
-        print(query)
         return query
 
     def get(self,request,schid=None,stuid=None):
